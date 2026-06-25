@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sommaire - Navigation</title>
+    <style>
+        :root {
+            /* Vignettes encore plus hautes */
+            --card-width: 280px;
+            --card-height: 580px; 
+            --translateZ: 380px; /* Rayon du cercle */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000; /* Fond noir pour la profondeur */
+            overflow: hidden;
+        }
+
+        /* --- FOND D'ÉCRAN --- */
+        .bg-fixed {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            /* Vérifie bien ce chemin vers ton image de fond */
+            background: url('assets/images/champ.webp') no-repeat center center;
+            background-size: cover;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            /* Overlay très léger (10%) pour bien voir le paysage */
+            background-color: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(1px); /* Flou quasi inexistant */
+        }
+
+        /* --- SCÈNE 3D --- */
+        .scene {
+            width: var(--card-width);
+            height: var(--card-height);
+            perspective: 2000px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        /* --- VIGNETTES --- */
+        .card {
+            position: absolute;
+            width: var(--card-width);
+            height: var(--card-height);
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            /* L'ombre portée */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            cursor: pointer;
+            backface-visibility: hidden;
+            transition: filter 0.5s, opacity 0.5s;
+
+            /* AJOUT DU LISERET VERT KAKI */
+            /* 2px est une bonne épaisseur, tu peux mettre 1px pour plus de finesse */
+            border: 5px solid #4A7C59; 
+        }
+
+        /* Image occupe 9/10 */
+        .card img {
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Titre occupe 1/10 */
+        .card-title {
+            width: 100%;
+            height: 10%;
+            background: #4A7C59; /* Vert nature */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 0 5px;
+        }
+
+        /* Positionnement fixe des 6 cartes */
+        .card:nth-child(1) { transform: rotateY(0deg) translateZ(var(--translateZ)); }
+        .card:nth-child(2) { transform: rotateY(60deg) translateZ(var(--translateZ)); }
+        .card:nth-child(3) { transform: rotateY(120deg) translateZ(var(--translateZ)); }
+        .card:nth-child(4) { transform: rotateY(180deg) translateZ(var(--translateZ)); }
+        .card:nth-child(5) { transform: rotateY(240deg) translateZ(var(--translateZ)); }
+        .card:nth-child(6) { transform: rotateY(300deg) translateZ(var(--translateZ)); }
+
+        /* Mise en avant de la carte centrale */
+        .card.active {
+            filter: brightness(1);
+            opacity: 1;
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
+
+        .card:not(.active) {
+            filter: brightness(0.4) blur(1px);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --card-width: 190px;
+                --card-height: 400px;
+                --translateZ: 220px;
+            }
+        }
+
+        .nav-info {
+            position: fixed;
+            bottom: 30px;
+            left: 50%; /* On le place au milieu de l'écran */
+            transform: translateX(-50%); /* On le décale de sa propre moitié vers la gauche pour le centrer parfaitement */
+            background: rgba(0, 0, 0, 0.6); /* Un peu plus sombre pour la lisibilité */
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 100; /* On s'assure qu'il passe au-dessus de tout */
+            white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="bg-fixed"></div>
+    <div class="overlay"></div>
+
+    <div class="scene">
+        <div class="carousel" id="carousel">
+            <!-- Vérifie bien l'orthographe de tes fichiers images ci-dessous -->
+            <div class="card" onclick="selectCard(0, 'pages/aroma.html')">
+                <img src="assets/images/aroma.webp">
+                <div class="card-title">AROMATHERAPIE</div>
+            </div>
+            <div class="card" onclick="selectCard(1, 'pages/phyto.html')">
+                <!-- Tu as écrit .wepb dans ton message -->
+                <img src="assets/images/phyto.webp">
+                <div class="card-title">PHYTOTHERAPIE</div>
+            </div>
+            <div class="card" onclick="selectCard(2, 'pages/gemmo.html')">
+                <img src="assets/images/gemmo.webp">
+                <div class="card-title">GEMMOTHERAPIE</div>
+            </div>
+            <div class="card" onclick="selectCard(3, 'pages/coeur.html')">
+                <!-- Tu as écrit cœur.webp (avec l'accent) -->
+                <img src="assets/images/coeur.webp">
+                <div class="card-title">COUPS DE COEUR</div>
+            </div>
+            <div class="card" onclick="selectCard(4, 'pages/micro.html')">
+                <img src="assets/images/micro.webp">
+                <div class="card-title">CONSEILS MICRONUTRITION</div>
+            </div>
+            <div class="card" onclick="selectCard(5, 'pages/veto.html')">
+                <!-- Tu as écrit .weebp dans ton message -->
+                <img src="assets/images/veto.webp">
+                <div class="card-title">CONSEILS VETERINAIRES</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-info"> ← Cliquez ou utilisez les flèches → </div>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+        const cards = document.querySelectorAll('.card');
+        let currentRotation = 0;
+
+        function update() {
+            carousel.style.transform = `rotateY(${currentRotation}deg)`;
+            
+            // Calcul de l'index de la carte qui fait face (0 à 5)
+            // On utilise un modulo un peu complexe pour gérer les nombres négatifs
+            const index = ((-currentRotation / 60) % 6 + 6) % 6;
+            
+            cards.forEach((card, i) => {
+                if (i === Math.round(index)) card.classList.add('active');
+                else card.classList.remove('active');
+            });
+        }
+
+        function selectCard(index, url) {
+            const currentIndex = ((-currentRotation / 60) % 6 + 6) % 6;
+            
+            if (index === Math.round(currentIndex)) {
+                window.location.href = url;
+            } else {
+                let diff = index - currentIndex;
+                if (diff > 3) diff -= 6;
+                if (diff < -3) diff += 6;
+                currentRotation -= (diff * 60);
+                update();
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { currentRotation += 60; update(); }
+            if (e.key === 'ArrowRight') { currentRotation -= 60; update(); }
+            if (e.key === 'Enter') {
+                const active = document.querySelector('.card.active');
+                if(active) active.click();
+            }
+        });
+
+        update();
+    </script>
+</body>
+</html>

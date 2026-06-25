@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Les Conseils de Manon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../assets/images/champ.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* --- FORMULAIRE STYLE GLASSMORPHISM --- */
+        .contact-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 4px solid white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .contact-container h1 {
+            color: var(--main-green);
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-container p {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--main-green);
+            box-shadow: 0 0 10px rgba(74, 124, 89, 0.1);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #d3b683; /* Doré comme l'accueil */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--main-green);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .contact-container {
+                width: 95%;
+                padding: 25px;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../sommaire.html">Sommaire</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <main class="container">
+        <div class="contact-container">
+            <h1>Contactez Manon</h1>
+            <p>Une question ? Un conseil ? Envoyez-moi un message via ce formulaire.</p>
+
+            <!-- === REPÈRE : REMPLACE "TON_ID_ICI" PAR TON CODE FORMSPREE === -->
+            <form action="https://formspree.io/f/mykqkzpw" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">Votre Nom</label>
+                    <input type="text" name="name" id="name" placeholder="Ex: Jean Dupont" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Votre Email</label>
+                    <input type="email" name="_replyto" id="email" placeholder="Ex: jean@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" name="subject" id="subject" placeholder="Ex: Conseil sur une plante" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="6" placeholder="Votre message ici..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Envoyer mon message</button>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p><a href="../sommaire.html">Retour au Sommaire</a></p>
+        <p>Copyright 2026 - Créé par Bruno CULOT</p>
+    </footer>
+
+    <script src="../script/main.js"></script>
+</body>
+</html>

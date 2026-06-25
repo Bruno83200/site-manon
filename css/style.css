@@ -1,0 +1,223 @@
+:root {
+    --main-green: #4a7c59;
+    --light-green: rgba(74, 124, 89, 0.15); /* Couleur demandée avec transparence */
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.top-nav {
+    display: flex;
+    justify-content: center;
+    background: var(--main-green);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.top-nav a:hover, .top-nav a.active {
+    opacity: 1;
+    font-weight: bold;
+}
+
+/* Container de produits */
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* Carte Produit (L'exemple.png) */
+.product-card {
+    display: flex;
+    background-color: var(--light-green);
+    border: 5px solid var(--white);
+    border-radius: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    align-items: flex-start;
+}
+
+.product-image {
+    flex: 0 0 200px;
+    margin-right: 20px;
+}
+
+/* --- MISE À JOUR DU LISERÉ IMAGE --- */
+.product-image img {
+    width: 100%;
+    border-radius: 10px;
+    background: white;
+    /* Ajout du liseré de 3px de la couleur du titre */
+    border: 3px solid var(--main-green); 
+    /* Assure que la bordure ne déforme pas l'image */
+    box-sizing: border-box; 
+}
+
+.product-content {
+    flex: 1;
+}
+
+.product-content h2 {
+    color: var(--main-green);
+    margin-top: 0;
+    font-size: 1.8rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+    margin-bottom: 15px; /* Ajoute un peu d'air sous la ligne grise */
+}
+
+.libelle-text {
+    text-align: justify;
+    hyphens: auto;
+    /* On ajoute de la place en bas pour ne pas que le texte touche les pièces */
+    padding-bottom: 40px; 
+}
+
+/* --- MISE À JOUR POSITION DES PIÈCES --- */
+.price-tag {
+    position: absolute;
+    /* On augmente l'espace avec le bord pour qu'elles respirent */
+    bottom: 20px; 
+    right: 25px;
+    
+    background: rgba(255, 255, 255, 0.6); 
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    /* Option : un petit index pour être sûr qu'elles passent devant tout */
+    z-index: 5; 
+}
+
+/* Bouton Scroll Top */
+#scrollTop {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: var(--main-green);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: none; /* Caché par défaut */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+footer a { color: var(--main-green); text-decoration: none; }
+
+/* RESPONSIVE SMARTPHONE */
+@media (max-width: 600px) {
+    .product-card {
+        flex-direction: column;
+        align-items: center;
+    }
+    .product-image {
+        margin-right: 0;
+        margin-bottom: 15px;
+        width: 150px;
+    }
+    .product-content h2 {
+        text-align: center;
+    }
+    .top-nav {
+        font-size: 0.7rem;
+        flex-wrap: wrap;
+    }
+}
+
+main, .container {
+    background-color: transparent !important;
+}
+
+/* ============================================================
+   PIED DE PAGE (FOOTER) - STYLE PROFESSIONNEL
+   ============================================================ */
+
+footer {
+    margin-top: 60px; /* Espace après le dernier produit */
+    padding: 40px 20px;
+    
+    /* Effet verre dépoli pour la lisibilité sur l'image de fond */
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Séparation nette */
+    border-top: 3px solid white;
+    text-align: center;
+}
+
+/* Transformation du lien Sommaire en bouton "Call to Action" */
+footer a {
+    display: inline-block;
+    background-color: #4a7c59; /* Ton vert fétiche */
+    color: white !important; /* Force le texte en blanc */
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 50px; /* Bords bien ronds */
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+/* Effet au survol du bouton */
+footer a:hover {
+    background-color: #3a6347; /* Vert un peu plus foncé */
+    transform: translateY(-3px); /* Petit saut vers le haut */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Style du texte de copyright */
+footer p:last-child {
+    font-size: 0.8rem;
+    color: #444;
+    margin: 0;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 600px) {
+    footer {
+        padding: 30px 15px;
+    }
+    footer a {
+        width: 80%; /* Bouton plus large sur mobile pour cliquer facilement */
+    }
+}

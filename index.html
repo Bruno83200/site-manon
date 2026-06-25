@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+    <title>Les Conseils de Manon</title>
+    <style>
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* VIDEO & OVERLAY */
+        #bg-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+        video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+        }
+        #bg-container::after {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+
+        /* LUCIOLES */
+        .luciole {
+            position: absolute;
+            background: radial-gradient(circle, #fff 0%, #d3b683 50%, rgba(211,182,131,0) 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3;
+            animation: flottement var(--d) infinite ease-in-out, clignote 4s infinite;
+            filter: blur(2px);
+        }
+        @keyframes flottement {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -50px); }
+            50% { transform: translate(-20px, -100px); }
+            75% { transform: translate(40px, -150px); }
+        }
+        @keyframes clignote { 0%, 100% { opacity: 0; } 50% { opacity: 0.8; } }
+
+        /* CONTENT LAYER */
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .logo {
+            width: 750px; 
+            max-width: 80%; 
+            height: auto;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(211, 182, 131, 0.4));
+            animation: introLogo 2s ease-out;
+        }
+        @keyframes introLogo {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        h1 { 
+            font-weight: 300; font-size: 1.6rem; letter-spacing: 12px;
+            text-transform: uppercase; margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
+            animation: introText 2s ease-out 0.5s both;
+        }
+        p { 
+            font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            animation: introText 2s ease-out 0.8s both;
+        }
+        @keyframes introText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BOUTON ENTREZ */
+        .btn-entrez {
+            position: relative;
+            margin-top: 45px;
+            padding: 16px 65px;
+            background: linear-gradient(135deg, #d3b683 0%, #b89b6a 100%);
+            color: #222;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px rgba(211, 182, 131, 0.3);
+            transition: 0.4s;
+            animation: introText 2s ease-out 1.2s both;
+        }
+        .btn-entrez::before {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: brillance 4s infinite;
+        }
+        @keyframes brillance { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
+        .btn-entrez:hover {
+            transform: scale(1.1);
+            background: #fff;
+            color: #4a7c59;
+            letter-spacing: 7px;
+        }
+
+        /* LIENS LATERAUX (IMC & INFO) */
+        .imc-link, .info-link {
+            position: fixed;
+            top: 40px;
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: introLogo 2s ease-out 1.5s both, floatIMC 4s infinite ease-in-out;
+        }
+        .imc-link { right: 40px; }
+        .info-link { left: 40px; cursor: pointer; }
+
+        .imc-link img, .info-link img {
+            width: 130px;
+            height: auto;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 15px rgba(211, 182, 131, 0.5));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        @keyframes floatIMC {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .imc-link:hover { transform: scale(1.1) rotate(5deg) !important; }
+        .info-link:hover { transform: scale(1.1) rotate(-5deg) !important; }
+
+        /* MODAL / POPUP */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .modal-container {
+            background: rgba(255, 255, 255, 0.8) !important; 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 4px solid white;
+            border-radius: 30px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow-y: auto;
+            animation: modalIn 0.4s ease-out;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 25px;
+            font-size: 35px;
+            color: #4a7c59;
+            cursor: pointer;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .modal-container h2 {
+            color: #4a7c59 !important;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #d3b683; 
+            display: inline-block;
+            padding-bottom: 5px;
+            text-shadow: none !important;
+        }
+        .modal-text {
+            line-height: 1.7;
+            text-align: justify;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #1a1a1a !important;
+            text-shadow: none !important;
+        }
+        .modal-text p { text-shadow: none !important; }
+
+        .modal-btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 12px 35px;
+            background: #4a7c59;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.3);
+        }
+        .modal-btn:hover { background: #d3b683; transform: translateY(-2px); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo { width: 300px; }
+            h1 { font-size: 1.1rem; letter-spacing: 6px; }
+            /* --- L'ANCIEN #floating-image A ÉTÉ RETIRÉ D'ICI --- */
+            .imc-link, .info-link { top: 20px; }
+            .imc-link { right: 20px; }
+            .info-link { left: 20px; }
+            .imc-link img, .info-link img { width: 80px; }
+            .modal-container { padding: 25px; }
+            .modal-container h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container">
+        <video autoplay muted loop playsinline>
+            <source src="assets/videos/fond.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div id="magic-container"></div>
+
+    <!-- Liens Fixes -->
+    <a href="pages/imc.html" class="imc-link" title="Calculer mon IMC">
+        <img src="assets/images/logo_imc.webp" alt="Logo IMC">
+    </a>
+    <div class="info-link" onclick="toggleModal(true)" title="À propos">
+        <img src="assets/images/info.webp" alt="Info">
+    </div>
+
+    <div class="content">
+        <img src="assets/images/logo.webp" class="logo" alt="Logo">
+        <h1>Bienvenue</h1>
+        <p>sur mon site</p>
+        <a href="sommaire.html" class="btn-entrez">ENTREZ</a>
+    </div>
+    
+    <!-- Popup -->
+    <div class="modal-overlay" id="modalAbout" onclick="toggleModal(false)">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="toggleModal(false)">&times;</span>
+            <center><h2>À propos</h2></center>
+            <div class="modal-text">
+                <p>Passionnée par la santé naturelle et le bien-être, je suis préparatrice en pharmacie et j’ai choisi de consacrer cet espace au partage de connaissances et de conseils fondés sur une approche globale de la santé.</p>
+                <br>
+                <p>Au fil de mon parcours, j’ai développé une véritable expertise dans les domaines de l’aromathérapie, de la gemmothérapie, de la phytothérapie et de la micronutrition. Ces disciplines complémentaires s’appuient sur les richesses de la nature et les besoins fondamentaux de l’organisme pour accompagner chacun vers un meilleur équilibre physique et émotionnel.</p>
+                <br>
+                <p>Convaincue que la prévention et l’écoute du corps sont essentielles, je souhaite rendre ces approches accessibles à tous à travers des informations fiables, des conseils pratiques et des solutions naturelles adaptées au quotidien.</p>
+                <br>
+                <p>Ce site est né d’une passion : celle d’aider chacun à mieux comprendre son corps, à prendre soin de sa santé naturellement et à retrouver un bien-être durable. J’espère vous inspirer et vous accompagner dans votre démarche vers une vie plus harmonieuse, en accord avec les ressources précieuses que la nature met à notre disposition.</p>
+                <br>
+                <p style="text-align: center; font-style: italic; color: #4a7c59;">Explorez, apprenez et avançons ensemble sur le chemin d’une santé naturelle et équilibrée. ✨</p>
+            </div>
+            <a href="pages/contact.html" class="modal-btn">Me contacter</a>
+        </div>
+    </div>
+
+    <script>
+        // Création des lucioles
+        function createMagic() {
+            const container = document.getElementById('magic-container');
+            for (let i = 0; i < 15; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'luciole';
+                const size = Math.random() * 15 + 10 + 'px';
+                orb.style.width = size;
+                orb.style.height = size;
+                orb.style.left = Math.random() * 100 + 'vw';
+                orb.style.top = Math.random() * 80 + 10 + 'vh';
+                orb.style.setProperty('--d', Math.random() * 10 + 10 + 's');
+                orb.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(orb);
+            }
+        }
+
+        // Gestion de la popup
+        function toggleModal(show) {
+            const modal = document.getElementById('modalAbout');
+            modal.style.display = show ? 'flex' : 'none';
+            document.body.style.overflow = show ? 'hidden' : 'auto';
+        }
+
+        // Chargement initial (Uniquement pour les lucioles maintenant)
+        window.addEventListener('load', () => {
+            createMagic();
+        });
+    </script>
+</body>
+</html>

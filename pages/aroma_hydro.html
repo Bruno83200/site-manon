@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrolats - Site de Manon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../assets/images/aroma_he.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* --- AMÉLIORATION DE LA LISIBILITÉ DU CONTAINER --- */
+        .product-card {
+            /* On passe à 0.97 (presque opaque) pour bloquer l'image de fond derrière le texte */
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            
+            /* Effet "verre dépoli" : floute l'image uniquement sous la carte (très pro) */
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+
+            /* On renforce un peu l'ombre pour bien détacher la carte du fond */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            
+            /* On s'assure que le texte est bien foncé */
+            color: #1a1a1a !important;
+            
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+        }
+
+        /* Optionnel : Si le menu en haut est dur à lire aussi */
+        .top-nav {
+            background: rgba(74, 124, 89, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Style pour le bloc d'introduction (copie le style des cartes produits) */
+        .intro-card {
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+            padding: 30px;
+            margin-bottom: 30px; /* Espace avec le premier produit */
+            text-align: justify; 
+            hyphens: auto; /* Permet la coupure de mots si besoin pour éviter les grands espaces */
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+
+        /* Style spécifique pour le texte d'avertissement en rouge */
+        .warning-text {
+            color: #d90429; /* Un rouge élégant et lisible */
+            font-weight: bold;
+            margin-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 15px;
+        }
+
+        /* 2. JUSTIFICATION POUR LES E-CARDS (PRODUITS) */
+        .libelle-text {
+            text-align: justify;
+            hyphens: auto;
+            /* Un petit réglage pour que le texte ne colle pas trop aux bords */
+            padding-right: 5px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="aroma.html">Accueil Aroma</a>
+        <a href="aroma_he.html">Huiles Essentielles</a>
+        <a href="aroma_hydro.html" class="active">Hydrolats</a>
+        <a href="phyto.html">Phyto</a>
+        <a href="imc.html">I M C</a>
+        <!-- etc... -->
+    </nav>
+
+    <main id="product-list" class="container">
+        <!-- BLOC INTRODUCTION ET PRÉCAUTION -->
+        <div class="intro-card">
+            <p>
+                En matière d’aromathérapie, il ne faut surtout pas oublier et négliger les hydrolats.
+
+                L'hydrolat est un des deux produits obtenus lors de la distillation à la vapeur d'eau. Durant celle-ci, les composés volatils de la plante sont entraînés par la vapeur d'eau jusqu'au condenseur. L'huile essentielle, qui est dans la grande majorité des cas plus légères que l'eau, surnage à sa surface dans "l'essencier". L'eau qu'elle recouvre est dite "eau florale" dans le cas de distillation des fleurs, "hydrolats" ou eau distillée aromatique pour les autres parties de la plante. On peut noter qu'il existe de rares cas où l'huile essentielle est plus lourde que l'eau (par ex. giroflier). Pour être de bonne qualité, les hydrolats doivent être obtenus lors de la première demi-heure de distillation. L'hydrolat est très faiblement concentré en composants aromatiques, entre 0,5% et 0,1%, et donc beaucoup moins actif que l'huile essentielle.
+            </p>            
+        </div>
+
+        <!-- Les produits seront injectés ici par le JS en dessous de ce bloc -->
+    </main>
+
+    <button id="scrollTop" title="Retour en haut">▲</button>
+
+    <footer>
+        <p><a href="../sommaire.html">Retour au Sommaire</a></p>
+        <p>Copyright 2026 - Créé par Bruno CULOT</p>
+    </footer>
+
+    <!-- ORDRE IMPORTANT DES SCRIPTS -->
+    <script src="../json/aroma_hydro.js"></script> 
+    <script src="../script/main.js"></script>
+    <script>
+        // On appelle la fonction de main.js avec la variable définie dans aroma_he.js
+        if (typeof dataHydro !== 'undefined') {
+            displayProducts(dataHydro);
+        } else {
+            console.error("La variable dataHydro n'est pas trouvée. Vérifiez le fichier aroma_hydro.js");
+        }
+    </script>
+</body>
+</html>

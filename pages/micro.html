@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micronutrition - Les Conseils de Manon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../assets/images/micronut.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* --- STYLE GLASSMORPHISM --- */
+        .product-card, .intro-card {
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            color: #1a1a1a !important;
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: justify; 
+            hyphens: auto;
+            line-height: 1.6;
+        }
+
+        .intro-card {
+            font-size: 1.1rem;
+        }
+
+        .top-nav {
+            background: rgba(74, 124, 89, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .libelle-text {
+            text-align: justify;
+            hyphens: auto;
+            padding-right: 5px; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="aroma.html">Aromathérapie</a>
+        <a href="phyto.html">Phytothérapie</a>
+        <a href="gemmo.html">Gemmothérapie</a>
+        <a href="coeur.html">Coups de Cœur</a>
+        <a href="micro.html" class="active">Micronutrition</a>
+        <a href="veto.html">Vétérinaire</a>
+        <a href="imc.html">I M C</a>
+    </nav>
+
+    <main id="product-list" class="container">
+        <!-- BLOC INTRODUCTION MICRONUTRITION -->
+        <div class="intro-card">
+            <p>
+                Découvrez les conseils en micro-nutrition que j'ai élaborés pour optimiser votre bien-être au quotidien. Grâce à une approche personnalisée, je vous donne quelques habitudes hygiéno-diététiques simples et efficaces : choix d’aliments riches en micronutriments, gestion des carences, et équilibre alimentaire adapté à vos besoins.
+            </p>
+            <p style="margin-top: 15px;">
+                Que ce soit pour booster votre énergie, renforcer votre immunité ou améliorer votre santé globale, mes recommandations s’appuient sur une expertise professionnelle pour vous accompagner vers une vitalité optimale.
+            </p>
+        </div>
+
+        <!-- Les produits seront injectés ici par le JS -->
+    </main>
+
+    <button id="scrollTop" title="Retour en haut">▲</button>
+
+    <footer>
+        <p><a href="../sommaire.html">Retour au Sommaire</a></p>
+        <p>Copyright 2026 - Créé par Bruno CULOT</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../json/micro.js"></script> 
+    <script src="../script/main.js"></script>
+    <script>
+        if (typeof dataMicro !== 'undefined') {
+            displayProducts(dataMicro);
+        } else {
+            console.error("La variable dataMicro n'est pas trouvée. Vérifiez le fichier micro.js");
+        }
+    </script>
+</body>
+</html>

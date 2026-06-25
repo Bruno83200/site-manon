@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisir votre catégorie - Aroma</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* On bloque le défilement pour un effet "application" plein écran sur PC */
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; 
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #000;
+        }
+
+        .split-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .split {
+            position: relative;
+            flex: 1; /* Chaque côté prend 50% par défaut */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: flex 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            text-decoration: none;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* --- SECTION HUILES ESSENTIELLES --- */
+        .split.he {
+            /* On ajoute un dégradé sombre par-dessus pour que le titre blanc soit lisible */
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                        url('../assets/images/huiles.webp') center/cover no-repeat;
+        }
+
+        /* --- SECTION HYDROLATS --- */
+        .split.hydro {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                        url('../assets/images/hydrolat.webp') center/cover no-repeat;
+            /* Une petite bordure blanche pour séparer les deux univers */
+            border-left: 4px solid white;
+        }
+
+        /* --- STYLE DES TITRES --- */
+        .split h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            z-index: 2;
+            padding: 20px 40px;
+            background: rgba(74, 124, 89, 0.75); /* Ton vert avec transparence */
+            border: 3px solid white;
+            border-radius: 60px;
+            backdrop-filter: blur(8px); /* Effet flou sous le titre */
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            max-width: 80%;
+        }
+
+        /* --- EFFETS AU SURVOL (PC uniquement) --- */
+        @media (min-width: 900px) {
+            .split:hover {
+                flex: 1.6; /* Le côté survolé s'élargit */
+            }
+            .split:hover h1 {
+                transform: scale(1.1);
+                background: rgba(74, 124, 89, 0.95);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            }
+            /* L'autre côté devient un peu plus sombre quand on ne le survole pas */
+            .split-container:hover .split:not(:hover) {
+                filter: grayscale(0.4) brightness(0.7);
+            }
+        }
+
+        /* --- ADAPTATION SMARTPHONE --- */
+        @media (max-width: 900px) {
+            .split-container {
+                flex-direction: column; /* On empile les zones verticalement */
+            }
+            .split.hydro {
+                border-left: none;
+                border-top: 4px solid white;
+            }
+            .split h1 {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+            body, html { overflow: auto; } /* On active le scroll sur mobile */
+        }
+
+        /* Bouton retour sommaire discret en bas */
+        .btn-footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: white;
+            color: #4a7c59;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+        }
+        .btn-footer:hover {
+            background: #4a7c59;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="split-container">
+        <!-- Lien vers la page des Huiles Essentielles -->
+        <a href="aroma_he.html" class="split he">
+            <h1>Huiles Essentielles</h1>
+        </a>
+
+        <!-- Lien vers la page des Hydrolats -->
+        <a href="aroma_hydro.html" class="split hydro">
+            <h1>Hydrolats</h1>
+        </a>
+    </div>
+
+    <!-- Pied de page discret -->
+    <a href="../sommaire.html" class="btn-footer">Sommaire</a>
+
+</body>
+</html>

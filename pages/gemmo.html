@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemmothérapie - Les Conseils de Manon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Utilisation temporaire du fond Phyto comme demandé */
+            background-image: url('../assets/images/bourgeons.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* --- STYLE DES CARTES (COHÉRENCE SITE) --- */
+        .product-card, .intro-card {
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            color: #1a1a1a !important;
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: justify; 
+            hyphens: auto;
+            line-height: 1.6;
+        }
+
+        .intro-card {
+            font-size: 1.1rem;
+        }
+
+        .top-nav {
+            background: rgba(74, 124, 89, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .libelle-text {
+            text-align: justify;
+            hyphens: auto;
+            padding-right: 5px; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="aroma.html">Aromathérapie</a>
+        <a href="phyto.html">Phytothérapie</a>
+        <a href="gemmo.html" class="active">Gemmothérapie</a>
+        <a href="coeur.html">Coups de Cœur</a>
+        <a href="micro.html">Micronutrition</a>
+        <a href="veto.html">Vétérinaire</a>
+        <a href="imc.html">I M C</a>
+    </nav>
+
+    <main id="product-list" class="container">
+        <!-- BLOC INTRODUCTION GEMMOTHÉRAPIE (Extrait du PDF) -->
+        <div class="intro-card">
+            <p>
+                La gemmothérapie est une branche de la phytothérapie qui utilise les bourgeons, jeunes pousses ou radicelles de plantes pour leurs propriétés thérapeutiques. Ces parties végétales, riches en substances actives (hormones, enzymes, vitamines, minéraux), sont généralement macérées dans un mélange d’eau, d’alcool et de glycérine pour obtenir des extraits concentrés. La gemmothérapie repose sur le principe que les tissus embryonnaires des plantes contiennent une énergie vitale et des principes actifs uniques, bénéfiques pour la santé humaine. Elle est utilisée pour traiter divers troubles, comme les problèmes digestifs, le stress ou les douleurs articulaires, en stimulant les fonctions naturelles du corps.
+            </p>            
+        </div>
+
+        <!-- Les produits seront injectés ici par le JS -->
+    </main>
+
+    <button id="scrollTop" title="Retour en haut">▲</button>
+
+    <footer>
+        <p><a href="../sommaire.html">Retour au Sommaire</a></p>
+        <p>Copyright 2026 - Créé par Bruno CULOT</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../json/gemmo.js"></script> 
+    <script src="../script/main.js"></script>
+    <script>
+        if (typeof dataGemmo !== 'undefined') {
+            displayProducts(dataGemmo);
+        } else {
+            console.error("La variable dataGemmo n'est pas trouvée. Vérifiez le fichier gemmo.js");
+        }
+    </script>
+</body>
+</html>

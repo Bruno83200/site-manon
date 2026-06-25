@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huiles Essentielles - Site de Manon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../assets/images/aroma_he.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* --- AMÉLIORATION DE LA LISIBILITÉ DU CONTAINER --- */
+        .product-card {
+            /* On passe à 0.97 (presque opaque) pour bloquer l'image de fond derrière le texte */
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            
+            /* Effet "verre dépoli" : floute l'image uniquement sous la carte (très pro) */
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+
+            /* On renforce un peu l'ombre pour bien détacher la carte du fond */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            
+            /* On s'assure que le texte est bien foncé */
+            color: #1a1a1a !important;
+            
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+        }
+
+        /* Optionnel : Si le menu en haut est dur à lire aussi */
+        .top-nav {
+            background: rgba(74, 124, 89, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Style pour le bloc d'introduction (copie le style des cartes produits) */
+        .intro-card {
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            border: 4px solid white !important;
+            border-radius: 25px !important;
+            padding: 30px;
+            margin-bottom: 30px; /* Espace avec le premier produit */
+            text-align: justify; 
+            hyphens: auto; /* Permet la coupure de mots si besoin pour éviter les grands espaces */
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+
+        /* Style spécifique pour le texte d'avertissement en rouge */
+        .warning-text {
+            color: #d90429; /* Un rouge élégant et lisible */
+            font-weight: bold;
+            margin-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 15px;
+        }
+
+        /* 2. JUSTIFICATION POUR LES E-CARDS (PRODUITS) */
+        .libelle-text {
+            text-align: justify;
+            hyphens: auto;
+            /* Un petit réglage pour que le texte ne colle pas trop aux bords */
+            padding-right: 5px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="aroma.html">Accueil Aroma</a>
+        <a href="aroma_he.html" class="active">Huiles Essentielles</a>
+        <a href="aroma_hydro.html">Hydrolats</a>
+        <a href="phyto.html">Phyto</a>
+        <a href="imc.html">I M C</a>
+        <!-- etc... -->
+    </nav>
+
+    <main id="product-list" class="container">
+        <!-- BLOC INTRODUCTION ET PRÉCAUTION -->
+        <div class="intro-card">
+            <p>
+                L’aromathérapie est une pratique thérapeutique qui utilise des huiles essentielles extraites de plantes 
+                (fleurs, feuilles, écorces, etc.) pour promouvoir le bien-être physique, mental et émotionnel. 
+                Ces huiles, riches en composés aromatiques, peuvent être inhalées, appliquées sur la peau ou parfois 
+                ingérées (sous supervision professionnelle) pour soulager divers maux, comme le stress, les troubles 
+                du sommeil, les douleurs ou les infections. Elle repose sur les propriétés pharmacologiques et 
+                olfactives des huiles essentielles, souvent intégrée dans une approche holistique de la santé.
+            </p>
+            <p class="warning-text">
+                Attention méfiance, les huiles essentielles doivent être utilisées avec prudence et connaissance. 
+                Une formation ou des conseils d'experts sont fortement recommandés pour une utilisation sécurisée 
+                et efficace. Elles sont fortement déconseillées aux jeunes enfants et femmes enceintes.
+            </p>
+        </div>
+
+        <!-- Les produits seront injectés ici par le JS en dessous de ce bloc -->
+    </main>
+
+    <button id="scrollTop" title="Retour en haut">▲</button>
+
+    <footer>
+        <p><a href="../sommaire.html">Retour au Sommaire</a></p>
+        <p>Copyright 2026 - Créé par Bruno CULOT</p>
+    </footer>
+
+    <!-- ORDRE IMPORTANT DES SCRIPTS -->
+    <script src="../json/aroma_he.js"></script> 
+    <script src="../script/main.js"></script>
+    <script>
+        // On appelle la fonction de main.js avec la variable définie dans aroma_he.js
+        if (typeof dataHE !== 'undefined') {
+            displayProducts(dataHE);
+        } else {
+            console.error("La variable dataHE n'est pas trouvée. Vérifiez le fichier aroma_he.js");
+        }
+    </script>
+</body>
+</html>
